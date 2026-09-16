@@ -5,12 +5,12 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY portfolio-api/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY portfolio-api/ .
 
-RUN python manage.py collectstatic --noinput 2>/dev/null || true
+RUN DJANGO_SECRET_KEY=build-time-placeholder python manage.py collectstatic --noinput 2>/dev/null || true
 
 EXPOSE 8000
 
