@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Christopher Mutuku Musila — Software Engineer, Full-Stack Developer. Python, Django, JavaScript, React, PostgreSQL, REST APIs, DevOps.">
+    <meta name="keywords" content="Christopher Mutuku Musila, Software Engineer, Full-Stack Developer, Python, Django, React, JavaScript, PostgreSQL, DevOps, REST APIs">
+    <title>Christopher Mutuku Musila — Software Engineer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="nav">
+        <div class="nav__container">
+            <a href="#hero" class="nav__logo">CM<span class="accent">.</span></a>
+            <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav__menu" id="navMenu">
+                <li><a href="#hero" class="nav__link active">Home</a></li>
+                <li><a href="#about" class="nav__link">About</a></li>
+                <li><a href="#projects" class="nav__link">Projects</a></li>
+                <li><a href="#skills" class="nav__link">Skills</a></li>
+                <li><a href="#experience" class="nav__link">Experience</a></li>
+                <li><a href="#certifications" class="nav__link">Certifications</a></li>
+                <li><a href="#contact" class="nav__link">Contact</a></li>
+                <li><button class="nav__link nav__link--cta" data-modal="contact">Let's Connect</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero__container">
+            <div class="hero__content">
+                <p class="hero__label">Software Engineer</p>
+                <h1 class="hero__title">Christopher Mutuku<br>Musila<span class="accent">.</span></h1>
+                <p class="hero__subtitle">Software Engineer &nbsp;|&nbsp; Full-Stack Developer &nbsp;|&nbsp; Python &nbsp;|&nbsp; JavaScript &nbsp;|&nbsp; Backend &nbsp;|&nbsp; DevOps</p>
+                <p class="hero__description">
+                    I build practical, production-oriented software systems from requirements and research through development, testing, deployment and continuous improvement.
+                </p>
+                <div class="hero__actions">
+                    <a href="#projects" class="btn btn--primary">Explore My Work</a>
+                    <button class="btn btn--secondary" data-modal="contact">Contact Me</button>
+                    <button class="btn btn--ghost" data-modal="cv">Request CV</button>
+                </div>
+            </div>
+            <div class="hero__visual">
+                <div class="hero__terminal">
+                    <div class="terminal__header">
+                        <span class="terminal__dot terminal__dot--red"></span>
+                        <span class="terminal__dot terminal__dot--yellow"></span>
+                        <span class="terminal__dot terminal__dot--green"></span>
+                        <span class="terminal__title">portfolio.sh</span>
+                    </div>
+                    <div class="terminal__body">
+                        <p><span class="terminal__prompt">$</span> <span class="terminal__cmd">whoami</span></p>
+                        <p class="terminal__output">Christopher Mutuku Musila</p>
+                        <p><span class="terminal__prompt">$</span> <span class="terminal__cmd">cat role.txt</span></p>
+                        <p class="terminal__output">Software Engineer | Full-Stack Developer</p>
+                        <p><span class="terminal__prompt">$</span> <span class="terminal__cmd">cat stack.txt</span></p>
+                        <p class="terminal__output">Python Django DRF FastAPI React Angular JavaScript</p>
+                        <p><span class="terminal__prompt">$</span> <span class="terminal__cmd">cat status.txt</span></p>
+                        <p class="terminal__output terminal__output--green">Available for opportunities</p>
+                        <p><span class="terminal__prompt">$</span> <span class="terminal__cursor">_</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section about" id="about">
+        <div class="section__container">
+            <p class="section__label">About Me</p>
+            <h2 class="section__title">Engineering software that solves real problems<span class="accent">.</span></h2>
+            <div class="about__grid">
+                <div class="about__text">
+                    <p>
+                        I am a practical and persistent software engineer who learns by building. I enjoy taking difficult technical problems apart, understanding why something fails and working through the problem until there is a reliable solution.
+                    </p>
+                    <p>
+                        My development journey has involved building complete applications rather than isolated coding exercises. I have worked through authentication problems, database migrations, API integration, CORS issues, deployment failures, frontend/backend integration, permissions, business calculations and production configuration.
+                    </p>
+                    <p>
+                        I value clean engineering, continuous learning and software that solves an actual problem.
+                    </p>
+                    <p>
+                        I am currently looking for an opportunity where I can contribute to a professional engineering team, continue growing technically and take ownership of meaningful software.
+                    </p>
+                </div>
+                <div class="about__highlights">
+                    <div class="highlight-card">
+                        <div class="highlight-card__number">02+</div>
+                        <div class="highlight-card__label">Production Applications<br>Built & Deployed</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-card__number">3</div>
+                        <div class="highlight-card__label">Professional<br>Certifications</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-card__number">100+</div>
+                        <div class="highlight-card__label">Granular Permissions<br>Implemented</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section projects" id="projects">
+        <div class="section__container">
+            <p class="section__label">Featured Projects</p>
+            <h2 class="section__title">Production applications I have built<span class="accent">.</span></h2>
+            <div class="projects__grid" id="projectsGrid">
+                <!-- Projects loaded dynamically -->
+            </div>
+
+            <div class="projects__github">
+                <h3 class="projects__github-title">GitHub Activity</h3>
+                <p class="projects__github-subtitle">Public repository statistics. Request the full profile link to explore all repositories.</p>
+                <div class="github__stats" id="githubStats">
+                    <div class="github__stat">
+                        <span class="github__stat-number" id="repoCount">—</span>
+                        <span class="github__stat-label">Public Repos</span>
+                    </div>
+                    <div class="github__stat">
+                        <span class="github__stat-number" id="totalStars">—</span>
+                        <span class="github__stat-label">Total Stars</span>
+                    </div>
+                    <div class="github__stat">
+                        <span class="github__stat-number" id="totalLanguages">—</span>
+                        <span class="github__stat-label">Languages</span>
+                    </div>
+                </div>
+                <div class="github__repos" id="githubRepos">
+                    <p class="github__loading">Loading repository data...</p>
+                </div>
+                <div class="projects__github-cta">
+                    <button class="btn btn--secondary" data-modal="projects">Request Project Links</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section skills" id="skills">
+        <div class="section__container">
+            <p class="section__label">Technical Skills</p>
+            <h2 class="section__title">Technologies and capabilities<span class="accent">.</span></h2>
+            <div class="skills__grid">
+                <div class="skill-group">
+                    <h3 class="skill-group__title">Programming</h3>
+                    <div class="skill-group__items">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">JSX</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group__title">Backend</h3>
+                    <div class="skill-group__items">
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Django REST Framework</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">Authentication</span>
+                        <span class="skill-tag">Authorization</span>
+                        <span class="skill-tag">JWT</span>
+                        <span class="skill-tag">RBAC</span>
+                        <span class="skill-tag">API Validation</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group__title">Frontend</h3>
+                    <div class="skill-group__items">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Angular</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">JSX</span>
+                        <span class="skill-tag">Vite</span>
+                        <span class="skill-tag">Responsive UI</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group__title">Databases</h3>
+                    <div class="skill-group__items">
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">SQLite</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Relational DB Design</span>
+                        <span class="skill-tag">Migrations</span>
+                        <span class="skill-tag">ORM</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group__title">DevOps / Infrastructure</h3>
+                    <div class="skill-group__items">
+                        <span class="skill-tag">Linux / Ubuntu</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">GitHub Actions</span>
+                        <span class="skill-tag">Cloud Deployment</span>
+                        <span class="skill-tag">Environment Config</span>
+                        <span class="skill-tag">CI/CD Concepts</span>
+                        <span class="skill-tag">PowerShell</span>
+                        <span class="skill-tag">Bash</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group__title">Security</h3>
+                    <div class="skill-group__items">
+                        <span class="skill-tag">JWT</span>
+                        <span class="skill-tag">Password Hashing</span>
+                        <span class="skill-tag">RBAC</span>
+                        <span class="skill-tag">Granular Permissions</span>
+                        <span class="skill-tag">Secure Token Handling</span>
+                        <span class="skill-tag">Input Validation</span>
+                        <span class="skill-tag">Audit Trails</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group__title">Engineering</h3>
+                    <div class="skill-group__items">
+                        <span class="skill-tag">Debugging</span>
+                        <span class="skill-tag">Testing</span>
+                        <span class="skill-tag">QA</span>
+                        <span class="skill-tag">Code Review</span>
+                        <span class="skill-tag">Performance Optimization</span>
+                        <span class="skill-tag">Technical Research</span>
+                        <span class="skill-tag">Documentation</span>
+                        <span class="skill-tag">Production Troubleshooting</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group__title">AI / Automation</h3>
+                    <div class="skill-group__items">
+                        <span class="skill-tag">Generative AI Integration</span>
+                        <span class="skill-tag">AI-Assisted Development</span>
+                        <span class="skill-tag">Automated Content Generation</span>
+                        <span class="skill-tag">API-Based AI Integration</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW I BUILD SOFTWARE -->
+    <section class="section process" id="process">
+        <div class="section__container">
+            <p class="section__label">Engineering Process</p>
+            <h2 class="section__title">How I build software<span class="accent">.</span></h2>
+            <div class="process__grid">
+                <div class="process__step">
+                    <div class="process__number">01</div>
+                    <h3 class="process__title">Understand</h3>
+                    <p class="process__description">Understand the business problem, requirements and expected workflow.</p>
+                </div>
+                <div class="process__step">
+                    <div class="process__number">02</div>
+                    <h3 class="process__title">Research</h3>
+                    <p class="process__description">Investigate appropriate technologies, APIs, architecture and implementation approaches.</p>
+                </div>
+                <div class="process__step">
+                    <div class="process__number">03</div>
+                    <h3 class="process__title">Design</h3>
+                    <p class="process__description">Design data structures, APIs, permissions, workflows and user interfaces.</p>
+                </div>
+                <div class="process__step">
+                    <div class="process__number">04</div>
+                    <h3 class="process__title">Build</h3>
+                    <p class="process__description">Implement the backend, frontend, database and integrations.</p>
+                </div>
+                <div class="process__step">
+                    <div class="process__number">05</div>
+                    <h3 class="process__title">Test</h3>
+                    <p class="process__description">Validate functionality, edge cases, permissions, calculations and error handling.</p>
+                </div>
+                <div class="process__step">
+                    <div class="process__number">06</div>
+                    <h3 class="process__title">Deploy</h3>
+                    <p class="process__description">Configure environments, databases, hosting, HTTPS, CORS and deployment processes.</p>
+                </div>
+                <div class="process__step">
+                    <div class="process__number">07</div>
+                    <h3 class="process__title">Troubleshoot</h3>
+                    <p class="process__description">Investigate real deployment, database, API, authentication and integration issues.</p>
+                </div>
+                <div class="process__step">
+                    <div class="process__number">08</div>
+                    <h3 class="process__title">Improve</h3>
+                    <p class="process__description">Continue refining performance, usability, security, architecture and maintainability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section experience" id="experience">
+        <div class="section__container">
+            <p class="section__label">Professional Experience</p>
+            <h2 class="section__title">Where I have applied my skills<span class="accent">.</span></h2>
+            <div class="experience__timeline">
+                <div class="experience__card">
+                    <div class="experience__header">
+                        <div>
+                            <h3 class="experience__role">Software Engineer</h3>
+                            <p class="experience__company">Surfnet / Upwork</p>
+                        </div>
+                        <span class="experience__date">Present</span>
+                    </div>
+                    <ul class="experience__list">
+                        <li>Build and maintain full-stack web applications across frontend, backend, database, and cloud infrastructure.</li>
+                        <li>Own features end-to-end from initial requirements analysis and technical research through implementation, testing, deployment, and maintenance.</li>
+                        <li>Develop robust backend services and REST APIs using Python, Django, and related frameworks supporting validation, pagination, filtering, and secure data handling.</li>
+                        <li>Build dynamic, responsive frontend interfaces using React, JavaScript, and Angular.</li>
+                        <li>Design and manage relational databases (PostgreSQL, MySQL), authoring optimized queries, schema migrations, and complex data models.</li>
+                        <li>Implement secure authentication, authorization, and permission systems utilizing JWTs, password hashing, and role-based access control (RBAC).</li>
+                        <li>Develop core business and financial workflows covering invoicing, payments, revenue tracking, accounts receivable/payable, and financial reporting.</li>
+                        <li>Integrate third-party APIs and payment gateways (e.g., M-Pesa, PayPal, Stripe) within sandbox and production environments.</li>
+                        <li>Containerize and deploy applications using Docker, cloud platforms, and Linux/Ubuntu environments.</li>
+                        <li>Manage environment configurations, CORS policies, deployment settings, and CI/CD pipelines.</li>
+                        <li>Use Git and GitHub for structured source control, branching, and release workflows.</li>
+                        <li>Leverage AI-assisted coding tools to accelerate implementation, debug complex issues, and streamline productivity.</li>
+                        <li>Diagnose and resolve systemic issues across APIs, databases, frontends, and cloud hosting platforms.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="section certifications" id="certifications">
+        <div class="section__container">
+            <p class="section__label">Certifications</p>
+            <h2 class="section__title">Professional development<span class="accent">.</span></h2>
+            <div class="certs__grid">
+                <div class="cert-card">
+                    <div class="cert-card__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                    </div>
+                    <h3 class="cert-card__title">DevOps Certification</h3>
+                    <p class="cert-card__org">Linux Foundation — LFS162</p>
+                    <p class="cert-card__date">Completed September 2025</p>
+                    <button class="cert-card__link" data-modal="cert-devops">View Certificate</button>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-card__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h3 class="cert-card__title">Developing Secure Software</h3>
+                    <p class="cert-card__org">Linux Foundation — LFD121</p>
+                    <p class="cert-card__date">Completed September 2025</p>
+                    <button class="cert-card__link" data-modal="cert-secure">View Certificate</button>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-card__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <h3 class="cert-card__title">Full Stack Software Developer Assessment</h3>
+                    <p class="cert-card__org">Coursera</p>
+                    <p class="cert-card__date">Completed November 2025</p>
+                    <button class="cert-card__link" data-modal="cert-fullstack">View Certificate</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section education" id="education">
+        <div class="section__container">
+            <p class="section__label">Education</p>
+            <h2 class="section__title">Academic background<span class="accent">.</span></h2>
+            <div class="education__card">
+                <div class="education__icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                </div>
+                <div class="education__content">
+                    <h3 class="education__degree">Diploma in Information Technology</h3>
+                    <p class="education__school">Vision Empowerment Training Institute</p>
+                    <p class="education__status">Present</p>
+                    <div class="education__areas">
+                        <span class="skill-tag">Software Development</span>
+                        <span class="skill-tag">Databases</span>
+                        <span class="skill-tag">Computer Systems</span>
+                        <span class="skill-tag">Networking</span>
+                        <span class="skill-tag">Information Technology</span>
+                        <span class="skill-tag">Technical Research</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / OPPORTUNITIES -->
+    <section class="section contact" id="contact">
+        <div class="section__container">
+            <p class="section__label">Open to Opportunities</p>
+            <h2 class="section__title">Interested in working with Christopher<span class="accent">?</span></h2>
+            <p class="contact__intro">
+                Whether you're a recruiter, hiring manager, company, client or technical collaborator, send a short message and Christopher will receive your request directly.
+            </p>
+            <div class="contact__actions">
+                <div class="contact__action-card">
+                    <div class="contact__action-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <h3 class="contact__action-title">Contact Me</h3>
+                    <p class="contact__action-desc">Have an opportunity or question? Send a message directly.</p>
+                    <button class="btn btn--primary" data-modal="contact">Send Message</button>
+                </div>
+                <div class="contact__action-card">
+                    <div class="contact__action-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    </div>
+                    <h3 class="contact__action-title">Request CV</h3>
+                    <p class="contact__action-desc">Interested in my experience and technical background? Request my current CV.</p>
+                    <button class="btn btn--secondary" data-modal="cv">Request CV</button>
+                </div>
+                <div class="contact__action-card">
+                    <div class="contact__action-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    </div>
+                    <h3 class="contact__action-title">Request Project Links</h3>
+                    <p class="contact__action-desc">Want to explore my work? Request the latest project and GitHub links.</p>
+                    <button class="btn btn--secondary" data-modal="projects">Request Links</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIVACY NOTICE -->
+    <section class="section privacy" id="privacy">
+        <div class="section__container">
+            <p class="section__label">Security & Privacy</p>
+            <h2 class="section__title">How your data is handled<span class="accent">.</span></h2>
+            <div class="privacy__content">
+                <p>
+                    This website records limited technical information — such as request timestamps, browser information and network identifiers — for security, abuse prevention, troubleshooting and protection of the website.
+                </p>
+                <p>
+                    Information is retained only for as long as reasonably necessary for these purposes and is not used for unrelated purposes. No exact GPS location data is collected. Approximate geolocation, where used, is derived from network identifiers and may be inaccurate due to VPNs, proxies and shared connections.
+                </p>
+                <p>
+                    Contact and request information is processed solely to respond to your inquiry. This data is not shared with third parties for marketing purposes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__content">
+                <p class="footer__name">Christopher Mutuku Musila</p>
+                <p class="footer__tagline">Software Engineer | Full-Stack Developer | Python | JavaScript | DevOps</p>
+                <p class="footer__open">Open to professional opportunities.</p>
+            </div>
+            <div class="footer__actions">
+                <button class="btn btn--primary btn--small" data-modal="contact">Contact Me</button>
+                <button class="btn btn--secondary btn--small" data-modal="cv">Request CV</button>
+                <button class="btn btn--secondary btn--small" data-modal="projects">Request Project Links</button>
+            </div>
+            <p class="footer__copy">&copy; 2026 Christopher Mutuku Musila. Built with HTML, CSS and JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- MODALS -->
+    <!-- Contact Me Modal -->
+    <div class="modal-overlay" id="modal-contact" aria-hidden="true">
+        <div class="modal" role="dialog" aria-labelledby="modal-contact-title">
+            <button class="modal__close" aria-label="Close">&times;</button>
+            <div class="modal__header">
+                <h2 class="modal__title" id="modal-contact-title">Send a Message</h2>
+                <p class="modal__subtitle">Christopher will receive your message directly.</p>
+            </div>
+            <form class="modal__form" id="formContact" novalidate>
+                <input type="text" name="_gotcha" class="form__honeypot" tabindex="-1" autocomplete="off">
+                <div class="conversational" id="conversationalContact">
+                    <span class="conversational__text">Hi Christopher, my name is</span>
+                    <input class="conversational__input" type="text" id="contact-fname" name="first_name" placeholder="First Name" required data-label="first name">
+                    <input class="conversational__input" type="text" id="contact-lname" name="last_name" placeholder="Last Name" required data-label="last name">
+                    <span class="conversational__text">from</span>
+                    <input class="conversational__input conversational__input--wide" type="text" id="contact-company" name="company" placeholder="Company / Organization" required data-label="company">
+                    <span class="conversational__text">. You can reach me at</span>
+                    <input class="conversational__input conversational__input--wide" type="email" id="contact-email" name="email" placeholder="Work Email" required data-label="email">
+                    <span class="conversational__text">. I want to get in touch regarding a</span>
+                    <select class="conversational__input conversational__select" id="contact-type" name="opportunity_type" required data-label="opportunity type">
+                        <option value="">opportunity type</option>
+                        <option value="Job Opportunity">Job Opportunity</option>
+                        <option value="Contract Opportunity">Contract Opportunity</option>
+                        <option value="Freelance Project">Freelance Project</option>
+                        <option value="Internship / Training">Internship / Training</option>
+                        <option value="Technical Collaboration">Technical Collaboration</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span class="conversational__other" id="contactOtherWrap" hidden>
+                        <span class="conversational__text">—</span>
+                        <input class="conversational__input" type="text" id="contact-other" name="opportunity_type_other" placeholder="please specify" data-label="specification">
+                    </span>
+                    <span class="conversational__text">role for</span>
+                    <input class="conversational__input conversational__input--wide" type="text" id="contact-position" name="position" placeholder="Position / Role">
+                    <span class="conversational__text">.</span>
+                </div>
+                <span class="conversational__errors" id="conversationalErrors"></span>
+                <div class="form__group" style="margin-top: 1.25rem;">
+                    <textarea class="form__input form__textarea" id="contact-message" name="message" rows="4" placeholder="Additional details or message (optional)..."></textarea>
+                </div>
+                <div class="form__actions">
+                    <button type="submit" class="btn btn--primary btn--full">Send Message</button>
+                    <button type="button" class="btn btn--ghost btn--full" data-modal-close>Cancel</button>
+                </div>
+            </form>
+            <div class="modal__success" id="success-contact" hidden>
+                <div class="success__icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3 class="success__title">Message received.</h3>
+                <p class="success__text">Thank you for reaching out. Your message has been sent successfully.</p>
+                <button class="btn btn--secondary" data-modal-close>Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Request CV Modal -->
+    <div class="modal-overlay" id="modal-cv" aria-hidden="true">
+        <div class="modal" role="dialog" aria-labelledby="modal-cv-title">
+            <button class="modal__close" aria-label="Close">&times;</button>
+            <div class="modal__header">
+                <h2 class="modal__title" id="modal-cv-title">Request My CV</h2>
+                <p class="modal__subtitle">Submit a short request and I'll review it and provide my current CV.</p>
+            </div>
+            <form class="modal__form" id="formCv" novalidate>
+                <input type="text" name="_gotcha" class="form__honeypot" tabindex="-1" autocomplete="off">
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label" for="cv-fname">First Name <span class="form__required">*</span></label>
+                        <input class="form__input" type="text" id="cv-fname" name="first_name" placeholder="John" required>
+                        <span class="form__error"></span>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="cv-lname">Last Name <span class="form__required">*</span></label>
+                        <input class="form__input" type="text" id="cv-lname" name="last_name" placeholder="Doe" required>
+                        <span class="form__error"></span>
+                    </div>
+                </div>
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label" for="cv-company">Company / Organization <span class="form__required">*</span></label>
+                        <input class="form__input" type="text" id="cv-company" name="company" placeholder="ABC Technologies" required>
+                        <span class="form__error"></span>
+                    </div>
+                </div>
+                <div class="form__group">
+                    <label class="form__label" for="cv-email">Work Email <span class="form__required">*</span></label>
+                    <input class="form__input" type="email" id="cv-email" name="email" placeholder="john@company.com" required>
+                    <span class="form__error"></span>
+                </div>
+                <div class="form__group">
+                    <label class="form__label" for="cv-position">Position / Opportunity <span class="form__required">*</span></label>
+                    <input class="form__input" type="text" id="cv-position" name="position" placeholder="Python Software Engineer" required>
+                    <span class="form__error"></span>
+                </div>
+                <div class="form__group">
+                    <label class="form__label" for="cv-message">Message</label>
+                    <textarea class="form__input form__textarea" id="cv-message" name="message" rows="4" placeholder="I'm interested in Christopher's profile for a Python Software Engineer position."></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Request CV</button>
+            </form>
+            <div class="modal__success" id="success-cv" hidden>
+                <div class="success__icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3 class="success__title">Request received.</h3>
+                <p class="success__text">Your CV request has been sent successfully. Christopher will review and respond.</p>
+                <button class="btn btn--secondary" data-modal-close>Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Request Project Links Modal -->
+    <div class="modal-overlay" id="modal-projects" aria-hidden="true">
+        <div class="modal" role="dialog" aria-labelledby="modal-projects-title">
+            <button class="modal__close" aria-label="Close">&times;</button>
+            <div class="modal__header">
+                <h2 class="modal__title" id="modal-projects-title">Request Project Links</h2>
+                <p class="modal__subtitle">Request the latest project and GitHub links.</p>
+            </div>
+            <form class="modal__form" id="formProjects" novalidate>
+                <input type="text" name="_gotcha" class="form__honeypot" tabindex="-1" autocomplete="off">
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label" for="proj-fname">First Name <span class="form__required">*</span></label>
+                        <input class="form__input" type="text" id="proj-fname" name="first_name" placeholder="John" required>
+                        <span class="form__error"></span>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="proj-lname">Last Name <span class="form__required">*</span></label>
+                        <input class="form__input" type="text" id="proj-lname" name="last_name" placeholder="Doe" required>
+                        <span class="form__error"></span>
+                    </div>
+                </div>
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label" for="proj-company">Company / Organization <span class="form__required">*</span></label>
+                        <input class="form__input" type="text" id="proj-company" name="company" placeholder="ABC Technologies" required>
+                        <span class="form__error"></span>
+                    </div>
+                </div>
+                <div class="form__group">
+                    <label class="form__label" for="proj-email">Work Email <span class="form__required">*</span></label>
+                    <input class="form__input" type="email" id="proj-email" name="email" placeholder="john@company.com" required>
+                    <span class="form__error"></span>
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Which projects are you interested in? <span class="form__required">*</span></label>
+                    <div class="form__checkboxes">
+                        <label class="form__checkbox"><input type="checkbox" name="projects" value="CRM"> CRM</label>
+                        <label class="form__checkbox"><input type="checkbox" name="projects" value="Rental Management System"> Rental Management System</label>
+                        <label class="form__checkbox"><input type="checkbox" name="projects" value="All Featured Projects"> All Featured Projects</label>
+                        <label class="form__checkbox"><input type="checkbox" name="projects" value="GitHub Profile"> GitHub Profile</label>
+                        <label class="form__checkbox"><input type="checkbox" name="projects" value="Other"> Other</label>
+                    </div>
+                    <span class="form__error" id="proj-projects-error"></span>
+                </div>
+                <div class="form__group">
+                    <label class="form__label" for="proj-message">Message</label>
+                    <textarea class="form__input form__textarea" id="proj-message" name="message" rows="4" placeholder="Any additional details..."></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Request Links</button>
+            </form>
+            <div class="modal__success" id="success-projects" hidden>
+                <div class="success__icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3 class="success__title">Request received.</h3>
+                <p class="success__text">Your request has been sent successfully. Christopher will review and respond with the relevant links.</p>
+                <button class="btn btn--secondary" data-modal-close>Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate View Modals -->
+    <div class="modal-overlay" id="modal-cert-devops" aria-hidden="true">
+        <div class="modal modal--certificate" role="dialog" aria-labelledby="cert-devops-title">
+            <button class="modal__close" aria-label="Close">&times;</button>
+            <div class="modal__header">
+                <h2 class="modal__title" id="cert-devops-title">DevOps Certification</h2>
+                <p class="modal__subtitle">Linux Foundation — LFS162 | Completed September 2025</p>
+            </div>
+            <div class="modal__certificate-body">
+                <p class="modal__certificate-note">Certificate verification requires direct access. To view this certificate, please request it through the contact form.</p>
+                <button class="btn btn--primary" data-modal-close data-modal="contact">Request Certificate</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-cert-secure" aria-hidden="true">
+        <div class="modal modal--certificate" role="dialog" aria-labelledby="cert-secure-title">
+            <button class="modal__close" aria-label="Close">&times;</button>
+            <div class="modal__header">
+                <h2 class="modal__title" id="cert-secure-title">Developing Secure Software</h2>
+                <p class="modal__subtitle">Linux Foundation — LFD121 | Completed September 2025</p>
+            </div>
+            <div class="modal__certificate-body">
+                <p class="modal__certificate-note">Certificate verification requires direct access. To view this certificate, please request it through the contact form.</p>
+                <button class="btn btn--primary" data-modal-close data-modal="contact">Request Certificate</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-cert-fullstack" aria-hidden="true">
+        <div class="modal modal--certificate" role="dialog" aria-labelledby="cert-fullstack-title">
+            <button class="modal__close" aria-label="Close">&times;</button>
+            <div class="modal__header">
+                <h2 class="modal__title" id="cert-fullstack-title">Full Stack Software Developer Assessment</h2>
+                <p class="modal__subtitle">Coursera | Completed November 2025</p>
+            </div>
+            <div class="modal__certificate-body">
+                <p class="modal__certificate-note">Certificate verification requires direct access. To view this certificate, please request it through the contact form.</p>
+                <button class="btn btn--primary" data-modal-close data-modal="contact">Request Certificate</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/projects.js?v=2"></script>
+    <script src="js/github.js?v=2"></script>
+    <script src="js/main.js?v=2"></script>
+</body>
+</html>

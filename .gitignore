@@ -1,0 +1,25 @@
+# Portfolio root .gitignore
+
+# API secrets
+portfolio-api/.env
+portfolio-api/db.sqlite3
+portfolio-api/db.sqlite3-journal
+
+# Python
+**/venv/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.egg-info/
+
+# Django
+**/staticfiles/
+**/*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

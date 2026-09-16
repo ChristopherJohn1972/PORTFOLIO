@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Security DS — Christopher Mutuku Musila</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-input: #1a1a25;
+            --border: #1e1e2e;
+            --border-light: #2a2a3a;
+            --text: #e8e8ed;
+            --text-secondary: #9898a8;
+            --text-muted: #68687a;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --green: #22c55e;
+            --red: #ef4444;
+            --orange: #f59e0b;
+            --yellow: #eab308;
+            --purple: #a855f7;
+            --font: 'Inter', -apple-system, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+        .login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; }
+        .login-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem; width: 100%; max-width: 400px; }
+        .login-card h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .login-card p { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .form-group input, .form-group select { width: 100%; padding: 0.75rem 1rem; font-size: 0.9375rem; font-family: var(--font); background: var(--bg-input); border: 1px solid var(--border); border-radius: 8px; color: var(--text); outline: none; transition: border-color 0.2s; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--accent); }
+        .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2368687a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+        .form-group select option { background: var(--bg-card); color: var(--text); }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 1.5rem; font-size: 0.9375rem; font-weight: 600; font-family: var(--font); border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; width: 100%; }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-small { padding: 0.5rem 1rem; font-size: 0.8125rem; width: auto; }
+        .btn-ghost { background: var(--bg-input); color: var(--text-secondary); border: 1px solid var(--border); }
+        .btn-ghost:hover { color: var(--text); border-color: var(--border-light); }
+        .error-msg { color: var(--red); font-size: 0.875rem; margin-top: 1rem; display: none; }
+
+        .dashboard { display: none; min-height: 100vh; }
+        .dashboard.active { display: block; }
+        .dash-header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .dash-header h2 { font-size: 1.125rem; font-family: var(--mono); }
+        .dash-header h2 span { color: var(--accent); }
+        .dash-header-right { display: flex; align-items: center; gap: 1rem; }
+        .dash-header-right .user { font-size: 0.875rem; color: var(--text-muted); }
+        .dash-content { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
+        .stat-card__label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+        .stat-card__value { font-size: 1.5rem; font-weight: 700; font-family: var(--mono); }
+        .stat-card__value--accent { color: var(--accent); }
+        .stat-card__value--green { color: var(--green); }
+        .stat-card__value--red { color: var(--red); }
+        .stat-card__value--orange { color: var(--orange); }
+        .stat-card__value--purple { color: var(--purple); }
+
+        .tabs { display: flex; gap: 0.25rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); overflow-x: auto; }
+        .tab { padding: 0.75rem 1.25rem; font-size: 0.875rem; font-weight: 500; font-family: var(--font); background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .tab:hover { color: var(--text); }
+        .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .filters { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem; align-items: end; }
+        .filter-group { display: flex; flex-direction: column; gap: 0.375rem; }
+        .filter-group label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .filter-group input, .filter-group select { padding: 0.5rem 0.75rem; font-size: 0.8125rem; font-family: var(--font); background: var(--bg-input); border: 1px solid var(--border); border-radius: 6px; color: var(--text); outline: none; }
+        .filter-group input:focus, .filter-group select:focus { border-color: var(--accent); }
+        .filter-actions { display: flex; gap: 0.5rem; }
+
+        .table-wrapper { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: var(--bg-input); }
+        th { padding: 0.75rem 1rem; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-align: left; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+        td { padding: 0.75rem 1rem; font-size: 0.8125rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(59, 130, 246, 0.03); }
+        tr.clickable { cursor: pointer; }
+
+        .badge { display: inline-block; padding: 0.2rem 0.5rem; font-size: 0.6875rem; font-weight: 600; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; }
+        .badge--allowed { background: rgba(34, 197, 94, 0.15); color: var(--green); }
+        .badge--blocked { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+        .badge--flagged { background: rgba(245, 158, 11, 0.15); color: var(--orange); }
+        .badge--failed { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+        .badge--pending { background: rgba(59, 130, 246, 0.1); color: var(--accent); }
+        .badge--spam { background: rgba(239, 68, 68, 0.1); color: var(--red); }
+        .badge--info { background: rgba(59, 130, 246, 0.1); color: var(--accent); }
+        .badge--warning { background: rgba(245, 158, 11, 0.15); color: var(--orange); }
+        .badge--security { background: rgba(239, 68, 68, 0.1); color: var(--red); }
+        .badge--critical { background: rgba(239, 68, 68, 0.2); color: var(--red); }
+
+        .mono { font-family: var(--mono); font-size: 0.75rem; }
+        .text-muted { color: var(--text-muted); }
+        .truncate { max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .pagination { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border-top: 1px solid var(--border); font-size: 0.8125rem; color: var(--text-muted); }
+        .pagination-btns { display: flex; gap: 0.5rem; }
+        .pagination-btns button { padding: 0.375rem 0.75rem; font-size: 0.75rem; font-family: var(--font); background: var(--bg-input); border: 1px solid var(--border); border-radius: 4px; color: var(--text-secondary); cursor: pointer; }
+        .pagination-btns button:hover { border-color: var(--accent); color: var(--text); }
+        .pagination-btns button:disabled { opacity: 0.4; cursor: default; }
+
+        /* Detail Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 640px; max-height: 85vh; overflow-y: auto; }
+        .modal-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+        .modal-header h3 { font-size: 1rem; font-weight: 600; }
+        .modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.25rem; cursor: pointer; padding: 0.25rem; }
+        .modal-close:hover { color: var(--text); }
+        .modal-body { padding: 1.5rem; }
+        .detail-grid { display: grid; grid-template-columns: 140px 1fr; gap: 0.75rem 1rem; font-size: 0.875rem; }
+        .detail-label { color: var(--text-muted); font-weight: 500; }
+        .detail-value { color: var(--text-secondary); word-break: break-all; }
+        .detail-value.mono { font-family: var(--mono); font-size: 0.8125rem; }
+
+        .privacy-notice { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+        .privacy-notice strong { color: var(--text-secondary); }
+        .empty-state { text-align: center; padding: 3rem; color: var(--text-muted); }
+
+        @media (max-width: 768px) {
+            .dash-content { padding: 1rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .table-wrapper { overflow-x: auto; }
+            table { min-width: 900px; }
+            .filters { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <h1>Portfolio Security DS</h1>
+            <p>Authenticate to access the portfolio admin panel.</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                <p class="error-msg" id="loginError"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="dashboard" id="dashboard">
+        <div class="dash-header">
+            <h2><span>CM.</span> Portfolio Security DS</h2>
+            <div class="dash-header-right">
+                <span class="user" id="dashUser"></span>
+                <button class="btn btn-ghost btn-small" onclick="logout()">Sign Out</button>
+            </div>
+        </div>
+
+        <div class="dash-content">
+            <div class="privacy-notice">
+                <strong>Security & Privacy Notice:</strong>
+                This dashboard records limited technical information — request timestamps, browser information
+                and network identifiers — for security, abuse prevention, troubleshooting and protection of the
+                website. No GPS location, passwords, API keys or secrets are stored.
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-card__label">Total Events</div>
+                    <div class="stat-card__value" id="statTotalEvents">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">Today's Visits</div>
+                    <div class="stat-card__value stat-card__value--accent" id="statTodayVisits">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">Security Events</div>
+                    <div class="stat-card__value stat-card__value--red" id="statSecurityEvents">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">Flagged Events</div>
+                    <div class="stat-card__value stat-card__value--orange" id="statFlaggedEvents">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">Blocked Requests</div>
+                    <div class="stat-card__value stat-card__value--red" id="statBlockedEvents">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">CV Requests</div>
+                    <div class="stat-card__value stat-card__value--purple" id="statCvRequests">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">Contact Requests</div>
+                    <div class="stat-card__value stat-card__value--accent" id="statContactRequests">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">Project Link Requests</div>
+                    <div class="stat-card__value stat-card__value--accent" id="statProjectLinkRequests">—</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="security">Security Events</button>
+                <button class="tab" data-tab="contacts">Contact Requests</button>
+                <button class="tab" data-tab="cv">CV Requests</button>
+                <button class="tab" data-tab="links">Project Link Requests</button>
+            </div>
+
+            <!-- Security Events Tab -->
+            <div class="tab-content active" id="tab-security">
+                <!-- Filters -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Search (IP / Request ID)</label>
+                        <input type="text" id="filterSearch" placeholder="IP or Request ID...">
+                    </div>
+                    <div class="filter-group">
+                        <label>Event Type</label>
+                        <select id="filterEventType">
+                            <option value="">All Events</option>
+                            <option value="portfolio_visit">Portfolio Visit</option>
+                            <option value="page_view">Page View</option>
+                            <option value="project_view">Project View</option>
+                            <option value="cv_request">CV Request</option>
+                            <option value="contact_request">Contact Request</option>
+                            <option value="project_link_request">Project Link Request</option>
+                            <option value="admin_login">Admin Login</option>
+                            <option value="validation_error">Validation Error</option>
+                            <option value="rate_limit_exceeded">Rate Limit</option>
+                            <option value="suspicious_request">Suspicious Request</option>
+                            <option value="honeypot_triggered">Honeypot Triggered</option>
+                            <option value="unauthorized_access">Unauthorized Access</option>
+                            <option value="forbidden_request">Forbidden Request</option>
+                            <option value="invalid_endpoint">Invalid Endpoint</option>
+                            <option value="server_error">Server Error</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Result</label>
+                        <select id="filterResult">
+                            <option value="">All</option>
+                            <option value="allowed">Allowed</option>
+                            <option value="blocked">Blocked</option>
+                            <option value="flagged">Flagged</option>
+                            <option value="failed">Failed</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Severity</label>
+                        <select id="filterSeverity">
+                            <option value="">All</option>
+                            <option value="info">Info</option>
+                            <option value="warning">Warning</option>
+                            <option value="security">Security</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Method</label>
+                        <select id="filterMethod">
+                            <option value="">All</option>
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PUT">PUT</option>
+                            <option value="DELETE">DELETE</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="filterStatus">
+                            <option value="">All</option>
+                            <option value="200">200</option>
+                            <option value="400">400</option>
+                            <option value="401">401</option>
+                            <option value="403">403</option>
+                            <option value="404">404</option>
+                            <option value="429">429</option>
+                            <option value="500">500</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Date From</label>
+                        <input type="date" id="filterDateFrom">
+                    </div>
+                    <div class="filter-group">
+                        <label>Date To</label>
+                        <input type="date" id="filterDateTo">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn btn-primary btn-small" onclick="loadSecurityLogs(1)">Filter</button>
+                        <button class="btn btn-ghost btn-small" onclick="clearFilters()">Clear</button>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Event</th>
+                                <th>Severity</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                                <th>Result</th>
+                                <th>IP</th>
+                                <th>Detail</th>
+                            </tr>
+                        </thead>
+                        <tbody id="securityTableBody">
+                            <tr><td colspan="8" class="empty-state">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="securityPagination"></div>
+                </div>
+            </div>
+
+            <!-- Contacts Tab -->
+            <div class="tab-content" id="tab-contacts">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Email</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>ID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactsTableBody">
+                            <tr><td colspan="7" class="empty-state">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CV Requests Tab -->
+            <div class="tab-content" id="tab-cv">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Email</th>
+                                <th>Position</th>
+                                <th>Status</th>
+                                <th>ID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cvTableBody">
+                            <tr><td colspan="7" class="empty-state">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Link Requests Tab -->
+            <div class="tab-content" id="tab-links">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Email</th>
+                                <th>Projects</th>
+                                <th>Status</th>
+                                <th>ID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="linksTableBody">
+                            <tr><td colspan="7" class="empty-state">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Detail Modal -->
+    <div class="modal-overlay" id="eventModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Event Details</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="eventModalBody"></div>
+        </div>
+    </div>
+
+    <script>
+    const API_BASE = window.location.origin + '/api';
+    let authToken = localStorage.getItem('dash_token');
+    let secPage = 1;
+
+    if (authToken) showDashboard();
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+        });
+    });
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorEl = document.getElementById('loginError');
+        try {
+            const res = await fetch(API_BASE + '/admin/login/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            });
+            const data = await res.json();
+            if (res.ok && data.token) {
+                authToken = data.token;
+                localStorage.setItem('dash_token', authToken);
+                document.getElementById('dashUser').textContent = data.user;
+                showDashboard();
+            } else {
+                errorEl.textContent = data.detail || 'Login failed.';
+                errorEl.style.display = 'block';
+            }
+        } catch (err) {
+            errorEl.textContent = 'Connection error.';
+            errorEl.style.display = 'block';
+        }
+    });
+
+    function logout() {
+        authToken = null;
+        localStorage.removeItem('dash_token');
+        document.getElementById('dashboard').classList.remove('active');
+        document.getElementById('loginScreen').style.display = 'flex';
+    }
+
+    async function showDashboard() {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('dashboard').classList.add('active');
+        try {
+            const res = await fetch(API_BASE + '/admin/dashboard/', {
+                headers: { 'Authorization': 'Bearer ' + authToken },
+            });
+            if (res.status === 401 || res.status === 403) { logout(); return; }
+            const data = await res.json();
+            renderDashboard(data);
+        } catch (err) {
+            console.error('Dashboard load error:', err);
+        }
+    }
+
+    function renderDashboard(data) {
+        const s = data.summary;
+        document.getElementById('statTotalEvents').textContent = s.total_events;
+        document.getElementById('statTodayVisits').textContent = s.today_visits;
+        document.getElementById('statSecurityEvents').textContent = s.security_events;
+        document.getElementById('statFlaggedEvents').textContent = s.flagged_events;
+        document.getElementById('statBlockedEvents').textContent = s.blocked_events;
+        document.getElementById('statCvRequests').textContent = s.cv_requests;
+        document.getElementById('statContactRequests').textContent = s.contact_requests;
+        document.getElementById('statProjectLinkRequests').textContent = s.project_link_requests;
+
+        renderSecurityTable(data.recent_events);
+        renderContactsTable(data.recent_contacts);
+        renderCvTable(data.recent_cvs);
+        renderLinksTable(data.recent_links);
+        loadSecurityLogs(1);
+    }
+
+    function renderSecurityTable(events) {
+        const body = document.getElementById('securityTableBody');
+        if (!events || events.length === 0) {
+            body.innerHTML = '<tr><td colspan="8" class="empty-state">No security events recorded.</td></tr>';
+            return;
+        }
+        body.innerHTML = events.map(e => `
+            <tr class="clickable" onclick="showEventDetail('${e.event_id}')">
+                <td class="mono">${formatTime(e.created_at)}</td>
+                <td>${escapeHtml(e.event_type_display)}</td>
+                <td><span class="badge badge--${e.severity}">${e.severity}</span></td>
+                <td class="mono">${e.http_method}</td>
+                <td class="mono">${e.http_status || '—'}</td>
+                <td><span class="badge badge--${e.result}">${e.result_display}</span></td>
+                <td class="mono">${e.ip_address}</td>
+                <td class="truncate text-muted" title="${escapeHtml(e.detail)}">${escapeHtml(e.detail) || '—'}</td>
+            </tr>
+        `).join('');
+    }
+
+    async function loadSecurityLogs(page) {
+        secPage = page;
+        const params = new URLSearchParams();
+        const search = document.getElementById('filterSearch').value;
+        const eventType = document.getElementById('filterEventType').value;
+        const result = document.getElementById('filterResult').value;
+        const severity = document.getElementById('filterSeverity').value;
+        const method = document.getElementById('filterMethod').value;
+        const status = document.getElementById('filterStatus').value;
+        const dateFrom = document.getElementById('filterDateFrom').value;
+        const dateTo = document.getElementById('filterDateTo').value;
+
+        if (search) params.set('search', search);
+        if (eventType) params.set('event_type', eventType);
+        if (result) params.set('result', result);
+        if (severity) params.set('severity', severity);
+        if (method) params.set('method', method);
+        if (status) params.set('status', status);
+        if (dateFrom) params.set('date_from', dateFrom);
+        if (dateTo) params.set('date_to', dateTo);
+        params.set('page', page);
+        params.set('per_page', 30);
+
+        try {
+            const res = await fetch(API_BASE + '/admin/security-logs/?' + params.toString(), {
+                headers: { 'Authorization': 'Bearer ' + authToken },
+            });
+            if (res.ok) {
+                const data = await res.json();
+                renderSecurityTable(data.items);
+                renderPagination(data);
+            }
+        } catch (err) {
+            console.error('Failed to load security logs:', err);
+        }
+    }
+
+    function renderPagination(data) {
+        const el = document.getElementById('securityPagination');
+        if (data.pages <= 1) { el.innerHTML = ''; return; }
+        el.innerHTML = `
+            <span>Page ${data.page} of ${data.pages} (${data.total} events)</span>
+            <div class="pagination-btns">
+                <button ${data.page <= 1 ? 'disabled' : ''} onclick="loadSecurityLogs(${data.page - 1})">Prev</button>
+                <button ${data.page >= data.pages ? 'disabled' : ''} onclick="loadSecurityLogs(${data.page + 1})">Next</button>
+            </div>
+        `;
+    }
+
+    function clearFilters() {
+        document.getElementById('filterSearch').value = '';
+        document.getElementById('filterEventType').value = '';
+        document.getElementById('filterResult').value = '';
+        document.getElementById('filterSeverity').value = '';
+        document.getElementById('filterMethod').value = '';
+        document.getElementById('filterStatus').value = '';
+        document.getElementById('filterDateFrom').value = '';
+        document.getElementById('filterDateTo').value = '';
+        loadSecurityLogs(1);
+    }
+
+    async function showEventDetail(eventId) {
+        try {
+            const res = await fetch(API_BASE + '/admin/security-logs/?event_id=' + eventId, {
+                headers: { 'Authorization': 'Bearer ' + authToken },
+            });
+            if (!res.ok) return;
+            const e = await res.json();
+            const body = document.getElementById('eventModalBody');
+            body.innerHTML = `
+                <div class="detail-grid">
+                    <div class="detail-label">Event ID</div>
+                    <div class="detail-value mono">${e.event_id}</div>
+                    <div class="detail-label">Timestamp</div>
+                    <div class="detail-value">${new Date(e.created_at).toLocaleString()}</div>
+                    <div class="detail-label">Event Type</div>
+                    <div class="detail-value">${escapeHtml(e.event_type_display)}</div>
+                    <div class="detail-label">Severity</div>
+                    <div class="detail-value"><span class="badge badge--${e.severity}">${e.severity_display}</span></div>
+                    <div class="detail-label">IP Address</div>
+                    <div class="detail-value mono">${e.ip_address}</div>
+                    <div class="detail-label">Endpoint</div>
+                    <div class="detail-value mono">${escapeHtml(e.endpoint)}</div>
+                    <div class="detail-label">HTTP Method</div>
+                    <div class="detail-value mono">${e.http_method}</div>
+                    <div class="detail-label">HTTP Status</div>
+                    <div class="detail-value mono">${e.http_status || '—'}</div>
+                    <div class="detail-label">Result</div>
+                    <div class="detail-value"><span class="badge badge--${e.result}">${e.result_display}</span></div>
+                    <div class="detail-label">Action Taken</div>
+                    <div class="detail-value">${escapeHtml(e.action_taken) || '—'}</div>
+                    <div class="detail-label">Request ID</div>
+                    <div class="detail-value mono">${e.request_id || '—'}</div>
+                    <div class="detail-label">User-Agent</div>
+                    <div class="detail-value" style="font-size:0.75rem;">${escapeHtml(e.user_agent) || '—'}</div>
+                    <div class="detail-label">Referrer</div>
+                    <div class="detail-value">${escapeHtml(e.referrer) || '—'}</div>
+                    <div class="detail-label">Location</div>
+                    <div class="detail-value">${escapeHtml(e.location) || '—'}</div>
+                    <div class="detail-label">Event Details</div>
+                    <div class="detail-value">${escapeHtml(e.detail) || '—'}</div>
+                </div>
+            `;
+            document.getElementById('eventModal').classList.add('active');
+        } catch (err) {
+            console.error('Failed to load event detail:', err);
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('eventModal').classList.remove('active');
+    }
+
+    document.getElementById('eventModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('eventModal')) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    function renderContactsTable(contacts) {
+        const body = document.getElementById('contactsTableBody');
+        if (!contacts || contacts.length === 0) {
+            body.innerHTML = '<tr><td colspan="7" class="empty-state">No contact requests yet.</td></tr>';
+            return;
+        }
+        body.innerHTML = contacts.map(c => `
+            <tr>
+                <td class="mono">${formatTime(c.created_at)}</td>
+                <td>${escapeHtml(c.full_name)}</td>
+                <td>${escapeHtml(c.company)}</td>
+                <td class="mono">${escapeHtml(c.email)}</td>
+                <td>${escapeHtml(c.opportunity_type)}</td>
+                <td><span class="badge badge--${c.status}">${c.status}</span></td>
+                <td class="mono text-muted">${c.request_id.slice(0, 8)}</td>
+            </tr>
+        `).join('');
+    }
+
+    function renderCvTable(cvs) {
+        const body = document.getElementById('cvTableBody');
+        if (!cvs || cvs.length === 0) {
+            body.innerHTML = '<tr><td colspan="7" class="empty-state">No CV requests yet.</td></tr>';
+            return;
+        }
+        body.innerHTML = cvs.map(c => `
+            <tr>
+                <td class="mono">${formatTime(c.created_at)}</td>
+                <td>${escapeHtml(c.full_name)}</td>
+                <td>${escapeHtml(c.company)}</td>
+                <td class="mono">${escapeHtml(c.email)}</td>
+                <td>${escapeHtml(c.position)}</td>
+                <td><span class="badge badge--${c.status}">${c.status}</span></td>
+                <td class="mono text-muted">${c.request_id.slice(0, 8)}</td>
+            </tr>
+        `).join('');
+    }
+
+    function renderLinksTable(links) {
+        const body = document.getElementById('linksTableBody');
+        if (!links || links.length === 0) {
+            body.innerHTML = '<tr><td colspan="7" class="empty-state">No project link requests yet.</td></tr>';
+            return;
+        }
+        body.innerHTML = links.map(l => `
+            <tr>
+                <td class="mono">${formatTime(l.created_at)}</td>
+                <td>${escapeHtml(l.full_name)}</td>
+                <td>${escapeHtml(l.company)}</td>
+                <td class="mono">${escapeHtml(l.email)}</td>
+                <td>${Array.isArray(l.projects) ? l.projects.join(', ') : l.projects}</td>
+                <td><span class="badge badge--${l.status}">${l.status}</span></td>
+                <td class="mono text-muted">${l.request_id.slice(0, 8)}</td>
+            </tr>
+        `).join('');
+    }
+
+    function formatTime(iso) {
+        const d = new Date(iso);
+        return d.toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+    </script>
+</body>
+</html>
