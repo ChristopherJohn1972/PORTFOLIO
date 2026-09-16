@@ -2,7 +2,6 @@ services:
   - type: web
     name: portfolio-api
     runtime: python
-    dockerfilePath: portfolio-api/Dockerfile
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
