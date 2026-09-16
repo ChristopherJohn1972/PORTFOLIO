@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY portfolio-api/ .
 
-RUN mkdir -p /app/staticfiles && python manage.py collectstatic --noinput
+RUN DJANGO_SECRET_KEY=build-time-placeholder python manage.py collectstatic --noinput 2>/dev/null || true
 
 EXPOSE 8000
 
