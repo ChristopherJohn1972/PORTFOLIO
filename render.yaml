@@ -2,15 +2,14 @@ services:
   - type: web
     name: portfolio-api
     runtime: python
-    buildCommand: cd portfolio-api && pip install -r requirements.txt && python manage.py collectstatic --noinput
-    startCommand: cd portfolio-api && gunicorn portfolio.wsgi:application
+    dockerfilePath: Dockerfile
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
       - key: DJANGO_DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
-        sync: false
+        value: "portfolio-yzrg.onrender.com,localhost,127.0.0.1"
       - key: DB_ENGINE
         value: "postgresql"
       - key: DATABASE_URL
@@ -18,13 +17,13 @@ services:
           name: portfolio-db
           property: connectionString
       - key: EMAIL_HOST_USER
-        sync: false
+        value: "curlsjamin@gmail.com"
       - key: EMAIL_HOST_PASSWORD
         sync: false
       - key: CONTACT_RECEIVER_EMAIL
-        sync: false
+        value: "curlsjamin@gmail.com"
       - key: CORS_ALLOWED_ORIGINS
-        sync: false
+        value: "https://portfolio-yzrg.onrender.com,http://localhost:8080"
       - key: PYTHON_VERSION
         value: "3.12"
 

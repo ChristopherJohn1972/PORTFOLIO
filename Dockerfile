@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY portfolio-api/ .
 
-RUN python manage.py collectstatic --noinput 2>/dev/null || true
+RUN mkdir -p /app/staticfiles && python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
