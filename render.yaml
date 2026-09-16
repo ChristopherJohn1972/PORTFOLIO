@@ -22,6 +22,12 @@ services:
         sync: false
       - key: CONTACT_RECEIVER_EMAIL
         value: "curlsjamin@gmail.com"
+      - key: ADMIN_USERNAME
+        value: "Christopher"
+      - key: ADMIN_EMAIL
+        value: "curlsjamin@gmail.com"
+      - key: ADMIN_PASSWORD
+        sync: false
       - key: CORS_ALLOWED_ORIGINS
         value: "https://portfolio-yzrg.onrender.com,http://localhost:8080"
       - key: PYTHON_VERSION

@@ -12,6 +12,9 @@ COPY portfolio-api/ .
 
 RUN DJANGO_SECRET_KEY=build-time-placeholder python manage.py collectstatic --noinput 2>/dev/null || true
 
+COPY portfolio-api/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
 EXPOSE 8000
 
-CMD ["gunicorn", "portfolio.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
+CMD ["/app/entrypoint.sh"]
