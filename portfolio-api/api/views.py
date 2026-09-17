@@ -1,8 +1,8 @@
 import logging
 import threading
+import requests
 from django.conf import settings
 from django.contrib.auth import authenticate
-from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.utils import timezone
 from django.db.models import Q
@@ -23,12 +23,31 @@ logger = logging.getLogger('portfolio.api')
 
 
 def _send_email_async(subject, body, receiver):
-    if not receiver:
+    api_key = getattr(settings, 'RESEND_API_KEY', '')
+    from_email = getattr(settings, 'RESEND_FROM_EMAIL', 'onboarding@resend.dev')
+    if not api_key or not receiver:
         return
     try:
-        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [receiver], fail_silently=True)
+        resp = requests.post(
+            'https://api.resend.com/emails',
+            headers={
+                'Authorization': f'Bearer {api_key}',
+                'Content-Type': 'application/json',
+            },
+            json={
+                'from': f'Portfolio <{from_email}>',
+                'to': [receiver],
+                'subject': subject,
+                'text': body,
+            },
+            timeout=10,
+        )
+        if resp.status_code >= 400:
+            logger.error(f'Resend API error {resp.status_code}: {resp.text}')
+        else:
+            logger.info(f'Email sent to {receiver}: {subject}')
     except Exception as e:
-        logger.error(f'Failed to send email: {e}')
+        logger.error(f'Failed to send email via Resend: {e}')
 
 
 class HealthView(APIView):
