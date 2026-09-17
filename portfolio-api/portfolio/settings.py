@@ -118,11 +118,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS — restrict in production
 CORS_ALLOW_ALL_ORIGINS = DEBUG
-CORS_ALLOWED_ORIGINS = [
+_cors_from_env = [
     origin.strip()
     for origin in os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:8080').split(',')
     if origin.strip()
 ]
+CORS_ALLOWED_ORIGINS = list(set(_cors_from_env + [
+    'https://ptlio.vercel.app',
+    'https://portfolio-yzrg.onrender.com',
+    'http://localhost:8080',
+]))
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
     'DELETE',
