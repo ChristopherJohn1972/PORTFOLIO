@@ -28,11 +28,7 @@ function logPortfolioEvent(eventType, detail, endpoint) {
         endpoint: endpoint || window.location.pathname,
     });
     const url = `${API_BASE}/event/?${params}`;
-    if (navigator.sendBeacon) {
-        navigator.sendBeacon(url);
-    } else {
-        fetch(url, { method: 'GET', mode: 'cors' }).catch(() => {});
-    }
+    fetch(url, { method: 'GET', mode: 'cors' }).catch(() => {});
 }
 
 function logPageView() {
