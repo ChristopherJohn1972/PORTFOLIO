@@ -16,9 +16,9 @@ ALLOWED_HOSTS = ['*']
 
 # CSRF trusted origins for production
 CSRF_TRUSTED_ORIGINS = [
-    origin.strip()
-    for origin in os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:8080').split(',')
-    if origin.strip()
+    'https://ptlio.vercel.app',
+    'https://portfolio-yzrg.onrender.com',
+    'http://localhost:8080',
 ]
 
 INSTALLED_APPS = [
@@ -118,16 +118,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS — restrict in production
 CORS_ALLOW_ALL_ORIGINS = DEBUG
-_cors_from_env = [
-    origin.strip()
-    for origin in os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:8080').split(',')
-    if origin.strip()
-]
-CORS_ALLOWED_ORIGINS = list(set(_cors_from_env + [
+CORS_ALLOWED_ORIGINS = [
     'https://ptlio.vercel.app',
     'https://portfolio-yzrg.onrender.com',
     'http://localhost:8080',
-]))
+]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
     'DELETE',
