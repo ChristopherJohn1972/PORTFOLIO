@@ -4,6 +4,7 @@
 portfolio-api/.env
 portfolio-api/db.sqlite3
 portfolio-api/db.sqlite3-journal
+.env.local
 
 # Python
 **/venv/
@@ -23,3 +24,5 @@ portfolio-api/db.sqlite3-journal
 # OS
 .DS_Store
 Thumbs.db
+.neon
+.env.local
