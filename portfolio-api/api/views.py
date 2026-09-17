@@ -37,7 +37,13 @@ class PortfolioEventView(APIView):
     ]
 
     def post(self, request):
-        event_type = request.data.get('event_type', '')
+        return self._log_event(request, request.data)
+
+    def get(self, request):
+        return self._log_event(request, request.query_params)
+
+    def _log_event(self, request, data):
+        event_type = data.get('event_type', '')
         if event_type not in self.VALID_EVENTS:
             return Response({'error': 'Invalid event type'}, status=400)
 
@@ -45,14 +51,14 @@ class PortfolioEventView(APIView):
         user_agent = request.META.get('HTTP_USER_AGENT', '')[:500]
         referrer = request.META.get('HTTP_REFERER', '')[:500]
         request_id = getattr(request, '_request_id', '')
-        detail = request.data.get('detail', '')
-        endpoint = request.data.get('endpoint', '/')
+        detail = data.get('detail', '')
+        endpoint = data.get('endpoint', '/')
 
         SecurityLog.objects.create(
             event_type=event_type,
             severity='info',
             endpoint=endpoint,
-            http_method='GET',
+            http_method=request.method,
             http_status=200,
             result='allowed',
             ip_address=ip,

@@ -22,19 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* --- Event Logging --- */
 function logPortfolioEvent(eventType, detail, endpoint) {
-    fetch(`${API_BASE}/event/`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            event_type: eventType,
-            detail: detail || '',
-            endpoint: endpoint || window.location.pathname,
-            page_title: document.title || '',
-            screen_width: window.screen.width,
-            screen_height: window.screen.height,
-        }),
-    }).catch(e => console.warn('Event log failed:', e));
+    const params = new URLSearchParams({
+        event_type: eventType,
+        detail: detail || '',
+        endpoint: endpoint || window.location.pathname,
+    });
+    const url = `${API_BASE}/event/?${params}`;
+    if (navigator.sendBeacon) {
+        navigator.sendBeacon(url);
+    } else {
+        fetch(url, { method: 'GET', mode: 'cors' }).catch(() => {});
+    }
 }
 
 function logPageView() {
