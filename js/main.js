@@ -36,6 +36,24 @@ function logPageView() {
     logPortfolioEvent('page_view', `Viewed ${path}`, path);
 }
 
+/* --- Toast Notifications --- */
+function showToast(message, type) {
+    const existing = document.querySelector('.toast-notification');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = `toast-notification toast-${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => toast.classList.add('toast-visible'));
+
+    setTimeout(() => {
+        toast.classList.remove('toast-visible');
+        setTimeout(() => toast.remove(), 300);
+    }, 5000);
+}
+
 /* --- Navigation --- */
 function initNavigation() {
     const toggle = document.getElementById("navToggle");
@@ -326,18 +344,26 @@ async function handleFormSubmit(e, formType) {
             showSuccess(formType);
         } else {
             const errorData = await response.json().catch(() => ({}));
-            const errorMsg = errorData.detail || 'Something went wrong. Please try again.';
-
-            if (typeof errorMsg === 'object') {
-                // Handle field errors
-                const firstError = Object.values(errorMsg)[0];
-                alert(Array.isArray(firstError) ? firstError[0] : errorMsg);
+            let msg;
+            if (response.status === 500) {
+                msg = "We couldn't send your message right now. Please try again in a moment.";
+            } else if (response.status === 400) {
+                const detail = errorData.detail;
+                if (detail && typeof detail === 'object') {
+                    const firstError = Object.values(detail)[0];
+                    msg = Array.isArray(firstError) ? firstError[0] : JSON.stringify(detail);
+                } else {
+                    msg = detail || "Please check the information you entered.";
+                }
+            } else if (response.status >= 500) {
+                msg = "We couldn't send your message right now. Please try again in a moment.";
             } else {
-                alert(errorMsg);
+                msg = errorData.detail || "Something went wrong. Please try again.";
             }
+            showToast(msg, "error");
         }
     } catch (err) {
-        alert('Connection error. Please check your network and try again.');
+        showToast("Unable to reach the server. Please try again.", "error");
         console.error('Form submission error:', err);
     } finally {
         submitBtn.disabled = false;

@@ -1,4 +1,5 @@
 import logging
+import threading
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.core.mail import send_mail
@@ -19,6 +20,15 @@ from .serializers import (
 from .authentication import get_or_create_token
 
 logger = logging.getLogger('portfolio.api')
+
+
+def _send_email_async(subject, body, receiver):
+    if not receiver:
+        return
+    try:
+        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [receiver], fail_silently=True)
+    except Exception as e:
+        logger.error(f'Failed to send email: {e}')
 
 
 class HealthView(APIView):
@@ -116,7 +126,7 @@ class ContactSubmitView(APIView):
 
         contact.save()
 
-        # Send email notification
+        # Send email notification (non-blocking)
         receiver = settings.CONTACT_RECEIVER_EMAIL
         if receiver:
             subject = f"Portfolio Contact: {contact.opportunity_type} — {contact.full_name}"
@@ -132,10 +142,7 @@ class ContactSubmitView(APIView):
                 f"IP: {contact.ip_address}\n"
                 f"Time: {contact.created_at}\n"
             )
-            try:
-                send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [receiver])
-            except Exception as e:
-                logger.error(f'Failed to send contact email: {e}')
+            threading.Thread(target=_send_email_async, args=(subject, body, receiver), daemon=True).start()
 
         logger.info(
             'Contact request received',
@@ -194,7 +201,7 @@ class CVRequestSubmitView(APIView):
 
         cv_req.save()
 
-        # Send email notification
+        # Send email notification (non-blocking)
         receiver = settings.CONTACT_RECEIVER_EMAIL
         if receiver:
             subject = f"Portfolio CV Request: {cv_req.position} — {cv_req.full_name}"
@@ -209,10 +216,7 @@ class CVRequestSubmitView(APIView):
                 f"IP: {cv_req.ip_address}\n"
                 f"Time: {cv_req.created_at}\n"
             )
-            try:
-                send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [receiver])
-            except Exception as e:
-                logger.error(f'Failed to send CV request email: {e}')
+            threading.Thread(target=_send_email_async, args=(subject, body, receiver), daemon=True).start()
 
         logger.info(
             'CV request received',
@@ -271,7 +275,7 @@ class ProjectLinkRequestSubmitView(APIView):
 
         proj_req.save()
 
-        # Send email notification
+        # Send email notification (non-blocking)
         receiver = settings.CONTACT_RECEIVER_EMAIL
         if receiver:
             projects_str = ', '.join(proj_req.projects)
@@ -287,10 +291,7 @@ class ProjectLinkRequestSubmitView(APIView):
                 f"IP: {proj_req.ip_address}\n"
                 f"Time: {proj_req.created_at}\n"
             )
-            try:
-                send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [receiver])
-            except Exception as e:
-                logger.error(f'Failed to send project link request email: {e}')
+            threading.Thread(target=_send_email_async, args=(subject, body, receiver), daemon=True).start()
 
         logger.info(
             'Project link request received',
