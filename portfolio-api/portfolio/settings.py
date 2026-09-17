@@ -73,7 +73,6 @@ if DATABASE_URL:
         'default': dj_database_url.config(
             default=DATABASE_URL,
             conn_max_age=600,
-            conn_ssl_require=True,
         )
     }
 elif DB_ENGINE == 'postgresql':
