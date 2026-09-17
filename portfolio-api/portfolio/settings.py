@@ -116,8 +116,8 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS — restrict in production
-CORS_ALLOW_ALL_ORIGINS = DEBUG
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     'https://ptlio.vercel.app',
     'https://portfolio-yzrg.onrender.com',
