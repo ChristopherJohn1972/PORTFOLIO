@@ -713,7 +713,8 @@ class AdminSecurityLogsView(APIView):
 
 
 def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        return x_forwarded_for.split(',')[0].strip()
-    return request.META.get('REMOTE_ADDR')
+    for header in ('HTTP_X_FORWARDED_FOR', 'HTTP_X_REAL_IP', 'HTTP_X_CLIENT_IP'):
+        forwarded = request.META.get(header)
+        if forwarded:
+            return forwarded.split(',')[0].strip()
+    return request.META.get('REMOTE_ADDR', '127.0.0.1')
