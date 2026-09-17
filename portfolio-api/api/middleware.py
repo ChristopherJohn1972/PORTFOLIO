@@ -15,6 +15,10 @@ class SecurityLoggingMiddleware:
         if request.path.startswith('/static/') or request.path.startswith('/admin/') or request.path.startswith('/dashboard/') or request.path == '/favicon.ico':
             return self.get_response(request)
 
+        # Allow CORS preflight through without processing
+        if request.method == 'OPTIONS':
+            return self.get_response(request)
+
         ip = self.get_client_ip(request)
         now = time.time()
         request_id = str(uuid.uuid4())
