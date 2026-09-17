@@ -12,7 +12,7 @@ class SecurityLoggingMiddleware:
         self._rate_limit_store = defaultdict(list)
 
     def __call__(self, request):
-        if request.path.startswith('/static/') or request.path.startswith('/admin/'):
+        if request.path.startswith('/static/') or request.path.startswith('/admin/') or request.path.startswith('/dashboard/') or request.path == '/favicon.ico':
             return self.get_response(request)
 
         ip = self.get_client_ip(request)
