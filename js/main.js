@@ -209,6 +209,7 @@ function openModal(id) {
     const convErrors = overlay.querySelector(".conversational__errors");
     if (convErrors) convErrors.textContent = "";
 
+    overlay.setAttribute("aria-hidden", "false");
     overlay.classList.add("active");
     document.body.style.overflow = "hidden";
 
@@ -221,8 +222,14 @@ function openModal(id) {
 function closeModal(id) {
     const overlay = document.getElementById(`modal-${id}`);
     if (!overlay) return;
+
+    const trigger = document.querySelector(`[data-modal="${id}"]`);
+
     overlay.classList.remove("active");
+    overlay.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+
+    if (trigger) trigger.focus();
 }
 
 /* --- Forms --- */
@@ -287,7 +294,7 @@ async function handleFormSubmit(e, formType) {
 
     // Rate limit
     if (!checkRateLimit()) {
-        alert("Too many submissions. Please try again later.");
+        showToast("Too many submissions. Please try again later.", "error");
         return;
     }
 

@@ -1,6 +1,9 @@
+import logging
 from rest_framework.views import exception_handler
 from rest_framework.response import Response
 from rest_framework import status
+
+logger = logging.getLogger('portfolio.api')
 
 
 def custom_exception_handler(exc, context):
@@ -13,6 +16,11 @@ def custom_exception_handler(exc, context):
             'detail': response.data,
         }
     else:
+        logger.error(
+            'Unhandled exception',
+            exc_info=exc,
+            extra={'view': str(context.get('view', ''))},
+        )
         response = Response({
             'error': True,
             'status_code': 500,
